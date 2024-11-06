@@ -62,8 +62,8 @@ function Pessoa({ nome }) {
   const totalRestante = totalGastos - totalPagamentos;
 
   return (
-    <div className="bg-black/80 text-white p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-semibold mb-4">{nome}</h2>
+    <div className="bg-black/80 p-6 rounded-lg shadow-md">
+      <h2 className="text-2xl text-white font-semibold mb-4">{nome}</h2>
 
       <div className="mb-4">
         <input
@@ -88,8 +88,8 @@ function Pessoa({ nome }) {
         </button>
       </div>
 
-      <h3 className="text-lg font-medium mb-2">Gastos:</h3>
-      <ul className="list-disc pl-5 space-y-1 mb-4">
+      <h3 className="text-lg font-medium mb-2 text-white">Gastos:</h3>
+      <ul className="list-disc pl-5 space-y-1 mb-4 text-white">
         {gastos.map((gasto, index) => (
           <li key={index} className="flex justify-between items-center">
             <span>
@@ -105,7 +105,7 @@ function Pessoa({ nome }) {
         ))}
       </ul>
 
-      <h3 className="text-lg font-bold mb-2">Total de Gastos: R$ {totalGastos.toFixed(2)}</h3>
+      <h3 className="text-lg font-bold mb-2 text-white">Total de Gastos: R$ {totalGastos.toFixed(2)}</h3>
 
       <div className="mt-4">
         <input
@@ -123,14 +123,14 @@ function Pessoa({ nome }) {
         </button>
       </div>
 
-      <h3 className="text-lg font-medium mt-4 mb-2">Pagamentos:</h3>
-      <ul className="list-disc pl-5 space-y-1 mb-4">
+      <h3 className="text-lg font-medium mt-4 mb-2 text-white">Pagamentos:</h3>
+      <ul className="list-disc pl-5 space-y-1 mb-4 text-white">
         {pagamentos.map((pagamento, index) => (
           <li key={index}>R$ {pagamento.toFixed(2)}</li>
         ))}
       </ul>
 
-      <h3 className="text-lg font-bold mt-4">
+      <h3 className="text-lg font-bold mt-4 text-white">
         Total Restante: R$ {totalRestante.toFixed(2)}
       </h3>
     </div>
