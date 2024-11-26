@@ -1,55 +1,61 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"
 
 function Pessoa({ nome }) {
-  const [gastos, setGastos] = useState([]);
-  const [descricao, setDescricao] = useState("");
-  const [valor, setValor] = useState("");
-  const [pagamentos, setPagamentos] = useState([]); // Estado para armazenar pagamentos
-  const [valorPago, setValorPago] = useState("");
+  const [gastos, setGastos] = useState([])
+  const [descricao, setDescricao] = useState("")
+  const [valor, setValor] = useState("")
+  const [pagamentos, setPagamentos] = useState([]) // Estado para armazenar pagamentos
+  const [valorPago, setValorPago] = useState("")
 
   // Carregar dados do Local Storage
   useEffect(() => {
-    const dadosSalvos = localStorage.getItem(`gastos-${nome}`);
-    const pagamentosSalvos = localStorage.getItem(`pagamentos-${nome}`);
+    const dadosSalvos = localStorage.getItem(`gastos-${nome}`)
+    const pagamentosSalvos = localStorage.getItem(`pagamentos-${nome}`)
     if (dadosSalvos) {
-      setGastos(JSON.parse(dadosSalvos));
+      setGastos(JSON.parse(dadosSalvos))
     }
     if (pagamentosSalvos) {
-      setPagamentos(JSON.parse(pagamentosSalvos));
+      setPagamentos(JSON.parse(pagamentosSalvos))
     }
-  }, [nome]);
+  }, [nome])
 
   // Salvar dados no Local Storage
   useEffect(() => {
-    localStorage.setItem(`gastos-${nome}`, JSON.stringify(gastos));
-  }, [gastos, nome]);
+    localStorage.setItem(`gastos-${nome}`, JSON.stringify(gastos))
+  }, [gastos, nome])
 
   useEffect(() => {
-    localStorage.setItem(`pagamentos-${nome}`, JSON.stringify(pagamentos));
-  }, [pagamentos, nome]);
+    localStorage.setItem(`pagamentos-${nome}`, JSON.stringify(pagamentos))
+  }, [pagamentos, nome])
 
   const adicionarGasto = () => {
     if (descricao && valor) {
-      setGastos([...gastos, { descricao, valor: parseFloat(valor) }]);
-      setDescricao("");
-      setValor("");
+      setGastos([...gastos, { descricao, valor: parseFloat(valor) }])
+      setDescricao("")
+      setValor("")
     }
   };
 
   // Função para remover um gasto
   const removerGasto = (index) => {
-    const novosGastos = gastos.filter((_, i) => i !== index);
-    setGastos(novosGastos);
+    const novosGastos = gastos.filter((_, i) => i !== index)
+    setGastos(novosGastos)
   };
 
   // Função para adicionar um pagamento
   const adicionarPagamento = () => {
     if (valorPago) {
-      setPagamentos([...pagamentos, parseFloat(valorPago)]);
-      setValorPago("");
+      setPagamentos([...pagamentos, parseFloat(valorPago)])
+      setValorPago("")
     }
+  };
+
+  // Função para remover um pagamento
+  const removerPgamento = (index) => {
+    const novosPgamentos = pagamentos.filter((_, i) => i !== index)
+    setPagamentos(novosPgamentos)
   };
 
   // Total de gastos
@@ -126,7 +132,13 @@ function Pessoa({ nome }) {
       <h3 className="text-lg font-medium mt-4 mb-2 text-white">Pagamentos:</h3>
       <ul className="list-disc pl-5 space-y-1 mb-4 text-white">
         {pagamentos.map((pagamento, index) => (
-          <li key={index}>R$ {pagamento.toFixed(2)}</li>
+          <li key={index} className="flex justify-between items-center">
+            <span>R$ {pagamento.toFixed(2)}</span>
+            <button
+              onClick={() => removerPgamento(index)}
+              className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
+            >Remover</button>
+            </li>
         ))}
       </ul>
 
